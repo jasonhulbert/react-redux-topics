@@ -1,7 +1,20 @@
 import React from 'react';
+import { Box, Container, Typography } from '@material-ui/core';
 
-import VnText from '../../ui/VnText';
+class HomePage extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-const HomePage = () => <VnText tag="h1">Home</VnText>;
+  render() {
+    return (
+      <Container y={10}>
+        <Box my={5}>
+          <Typography variant="h2">Home</Typography>
+        </Box>
+      </Container>
+    );
+  }
+}
 
 export default HomePage;

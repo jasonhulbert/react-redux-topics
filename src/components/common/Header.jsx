@@ -1,24 +1,37 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { AppBar, Tabs, Tab, Container } from '@material-ui/core';
 
-const Header = () => {
-  const activeStyle = { color: 'red' };
+const navItems = [
+  {
+    label: 'Home',
+    to: '/',
+    exact: 'true'
+  },
+  {
+    label: 'Topics',
+    to: '/topics',
+    exact: 'false'
+  }
+];
 
+const Header = props => {
   return (
-    <nav>
-      <NavLink to="/" activeStyle={activeStyle} exact>
-        Home
-      </NavLink>
-      {' | '}
-      <NavLink to="/about" activeStyle={activeStyle}>
-        About
-      </NavLink>
-      {' | '}
-      <NavLink to="/topics" activeStyle={activeStyle}>
-        Topics
-      </NavLink>
-    </nav>
+    <AppBar position="static" color="default">
+      <Container>
+        <Tabs value={props.pathname}>
+          {navItems.map(({ label, to, exact }, index) => (
+            <Tab component={Link} key={index} label={label} value={to} to={to} exact={exact} />
+          ))}
+        </Tabs>
+      </Container>
+    </AppBar>
   );
 };
+
+Header.propTypes = {
+  pathname: PropTypes.string.isRequired
+}
 
 export default Header;

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import VnText from '../../ui/VnText';
-
-const NotFoundPage = () => <VnText tag="h1">Page not found.</VnText>;
+const NotFoundPage = () => <h1>Page not found.</h1>;
 
 export default NotFoundPage;
