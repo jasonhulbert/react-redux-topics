@@ -32,6 +32,9 @@ node_modules
 # Build folder
 build
 
+# VSCode configs
+.vscode
+
 # Webstorm metadata
 .idea
 
