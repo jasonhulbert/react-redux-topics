@@ -1,46 +1,14 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpackMerge = require('webpack-merge');
+const defaultConfig = require('./webpack.config');
 
-process.env.NODE_ENV = "development";
-
-module.exports = {
-  mode: "development",
-  target: "web",
-  devtool: "source-map",
-  entry: "./src/index",
-  output: {
-    path: path.resolve(__dirname, "build"),
-    publicPath: "/",
-    filename: "bundle.js"
-  },
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
+module.exports = webpackMerge(defaultConfig, {
+  devtool: 'eval-source-map',
   devServer: {
-    stats: "minimal",
+    stats: 'minimal',
     overlay: true,
     historyApiFallback: true,
     disableHostCheck: true,
-    headers: { "Access-Control-Allow-Origin": "*" },
+    headers: { 'Access-Control-Allow-Origin': '*' },
     https: false
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "src/index.html",
-      favicon: "src/favicon.ico"
-    })
-  ],
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ["babel-loader", "eslint-loader"]
-      },
-      {
-        test: /(\.css)$/,
-        use: ["style-loader", "css-loader"]
-      }
-    ]
   }
-};
+});

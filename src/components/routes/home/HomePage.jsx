@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, Container, Typography } from '@material-ui/core';
+import { Container } from '@material-ui/core';
+
+import PageTitle from '../../common/PageTitle';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -8,10 +10,8 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <Container y={10}>
-        <Box my={5}>
-          <Typography variant="h2">Home</Typography>
-        </Box>
+      <Container>
+        <PageTitle title="Home" />
       </Container>
     );
   }

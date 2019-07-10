@@ -18,11 +18,19 @@ const navItems = [
 
 const Header = props => {
   return (
-    <AppBar position="static" color="default">
+    <AppBar position="static" color="primary">
       <Container>
         <Tabs value={props.pathname}>
           {navItems.map(({ label, to, exact }, index) => (
-            <Tab component={Link} key={index} label={label} value={to} to={to} exact={exact} />
+            <Tab
+              disableRipple
+              component={Link}
+              key={index}
+              label={label}
+              value={to}
+              to={to}
+              exact={exact}
+            />
           ))}
         </Tabs>
       </Container>
@@ -32,6 +40,6 @@ const Header = props => {
 
 Header.propTypes = {
   pathname: PropTypes.string.isRequired
-}
+};
 
 export default Header;

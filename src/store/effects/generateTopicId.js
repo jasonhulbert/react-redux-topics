@@ -1,5 +1,5 @@
-import shortid from 'shortid';
+import uniqueStr from 'unique-string';
 
 export const generateTopicId = () => {
-  return shortid.generate();
+  return uniqueStr();
 };

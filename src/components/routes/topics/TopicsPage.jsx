@@ -1,35 +1,61 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Box, Container, Typography } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 
 import * as topicActions from '../../../store/actions/topicActions';
-import AddTopic from '../../add-topic/AddTopic';
+import PageTitle from '../../common/PageTitle';
+import CreateTopic from '../../create-topic/CreateTopic';
 import TopicList from '../../topic-list/TopicList';
+import EditTopic from '../../edit-topic/EditTopic';
 
 class TopicsPage extends React.Component {
   state = {
-    topics: []
+    topics: [],
+    editOpen: false,
+    editTopic: {}
   };
 
-  onDelete = topic => {
+  handleCreate = topic => {
+    this.props.dispatch(topicActions.createTopic(topic));
+  };
+
+  handleDelete = topic => {
     this.props.dispatch(topicActions.deleteTopic(topic));
+  };
+
+  handleEdit = topic => {
+    this.setState({
+      editTopic: topic,
+      editOpen: true
+    });
+  };
+
+  handleEditModalClose = () => {
+    this.setState({
+      editTopic: {},
+      editOpen: false
+    });
   };
 
   render() {
     return (
       <Container>
-        <Box my={5}>
-          <Typography variant="h2">Topics</Typography>
-        </Box>
+        <PageTitle title="Topics" />
 
-        <Box my={5}>
-          <AddTopic />
-        </Box>
+        <CreateTopic onSubmit={this.handleCreate} />
 
-        <Box my={5}>
-          <TopicList topics={this.props.topics} onDelete={this.onDelete} />
-        </Box>
+        <TopicList
+          topics={this.props.topics}
+          onDelete={this.handleDelete}
+          onEdit={this.handleEdit}
+        />
+
+        <EditTopic
+          topic={this.state.editTopic}
+          open={this.state.editOpen}
+          onClose={this.handleEditModalClose}
+        />
       </Container>
     );
   }
